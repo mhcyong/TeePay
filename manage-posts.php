@@ -4,8 +4,55 @@ include 'header.php';
 include 'menu.php';
 
 $stat = Typecho_Widget::widget('Widget_Stat');
-$posts = Typecho_Widget::widget('Widget_Contents_Post_Admin');
-$isAllPosts = ('on' == $request->get('__typecho_all_posts') || 'on' == Typecho_Cookie::get('__typecho_all_posts'));
+?>
+<style type="text/css">
+.am-fr {
+    float: right;
+    margin-top: -10px;
+}
+li.am-pagination-prev {
+    float: left;
+    margin: 0 10px;
+    list-style: none;
+}
+li.am-pagination-next {
+    float: left;
+    margin: 0 10px;
+    list-style: none;
+}
+</style>
+<?php 
+	$db = Typecho_Db::get();
+	$queryPosts= $db->select()->from('table.contents'); 
+	$page_now = isset($_GET['page_now']) ? intval($_GET['page_now']) : 1;
+	if($page_now<1){
+		$page_now=1;
+	}
+	$resultTotal = $db->fetchAll($queryPosts);
+	$page_rec=10;
+	$totalrec=count($resultTotal);
+	$page=ceil($totalrec/$page_rec);
+	if($page_now>$page){
+		$page_now=$page;
+	}
+	if($page_now<=1){
+		$before_page=1;
+		if($page>1){
+			$after_page=$page_now+1;
+		}else{
+			$after_page=1;
+		}
+	}else{
+		$before_page=$page_now-1;
+		if($page_now<$page){
+			$after_page=$page_now+1;
+		}else{
+			$after_page=$page;
+		}
+	}
+	$i=($page_now-1)*$page_rec<0?0:($page_now-1)*$page_rec;
+	$queryGoods= $db->select()->from('table.contents')->order('table.contents.modified',Typecho_Db::SORT_DESC)->offset($i)->limit($page_rec); 
+	$rowGoods = $db->fetchAll($queryGoods);
 ?>
 <div class="main">
     <div class="body container">
@@ -24,42 +71,49 @@ $isAllPosts = ('on' == $request->get('__typecho_all_posts') || 'on' == Typecho_C
                         <thead>
                             <tr>
                                 <th><?php _e('标题'); ?></th>
-                                <th><?php _e('状态'); ?></th>
+                                <th><?php _e('价格'); ?></th>
                             </tr>
                         </thead>
                         <tbody>
-                        	<?php if($posts->have()): ?>
-                            <?php while($posts->next()): ?>
-                            <tr id="<?php $posts->theId(); ?>">
-                                <td><a href="<?php echo $request->makeUriByRequest('cid='.$posts->cid); ?>" title="点击编辑"><?php $posts->title(); ?></a>
+                        	<?php
+							  foreach($rowGoods as $value){
+							?>
+                            <tr id="<?=$value["cid"];?>">
+                                <td><a href="<?php echo $request->makeUriByRequest('cid='.$value["cid"]); ?>" title="点击编辑"><?php echo $value["title"]; ?></a>
                                 <td>
-								<?php if($posts->vpay_isFee=="y"){
-									echo '元付费中';
-								}else{
-									echo '免费中';
-								}
+								<?php 
+								echo $value["teepay_price"];
 								?>
 								</td>		
                             </tr>
-                            <?php endwhile; ?>
-                            <?php else: ?>
-                            <tr>
-                            	<td colspan="6"><h6 class="typecho-list-table-title"><?php _e('没有任何文章'); ?></h6></td>
-                            </tr>
-                            <?php endif; ?>
+                            <?php
+							  }
+							?>
                         </tbody>
                     </table>
                 </div>
                 </form><!-- end .operate-form -->
 
                 <div class="typecho-list-operate clearfix">
-                    <form method="get">
-                        <?php if($posts->have()): ?>
-                        <ul class="typecho-pager">
-                            <?php $posts->pageNav(); ?>
-                        </ul>
-                        <?php endif; ?>
-                    </form>
+                    <div class="am-cf">
+					  共 <?=$totalrec;?> 条记录
+					  <div class="am-fr">
+						<ul class="am-pagination blog-pagination">
+						  <?php if($page_now!=1){?>
+							<li class="am-pagination-prev"><a href="<?=$url;?>?panel=TeePay%2Fmanage-posts.php&page_now=1">首页</a></li>
+						  <?php }?>
+						  <?php if($page_now>1){?>
+							<li class="am-pagination-prev"><a href="<?=$url;?>?panel=TeePay%2Fmanage-posts.php&page_now=<?=$before_page;?>">&laquo; 上一页</a></li>
+						  <?php }?>
+						  <?php if($page_now<$page){?>
+							<li class="am-pagination-next"><a href="<?=$url;?>?panel=TeePay%2Fmanage-posts.php&page_now=<?=$after_page;?>">下一页 &raquo;</a></li>
+						  <?php }?>
+						  <?php if($page_now!=$page){?>
+							<li class="am-pagination-next"><a href="<?=$url;?>?panel=TeePay%2Fmanage-posts.php&page_now=<?=$page;?>">尾页</a></li>
+						  <?php }?>
+						</ul>
+					  </div>
+					</div>
                 </div><!-- end .typecho-list-operate -->
 				
 				</div>

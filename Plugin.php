@@ -45,6 +45,20 @@ class TeePay_Plugin implements Typecho_Plugin_Interface{
 		$teepay_content = isset($row['teepay_content']) ? $row['teepay_content'] : '';	
 		$teepay_price = isset($row['teepay_price']) ? $row['teepay_price'] : '';	
 		$teepay_isFee = isset($row['teepay_isFee']) ? $row['teepay_isFee'] : '';	
+		if($teepay_isFee == "y"){
+		$html = '<section class="typecho-post-option"><label for="teepay_price" class="typecho-label">是否付费</label>
+				<p><span><input name="teepay_isFee" type="radio" value="n" id="teepay_isFee-n">
+				<label for="teepay_isFee-n">
+				免费的</label>
+				</span><span>
+				<input name="teepay_isFee" type="radio" value="y" id="teepay_isFee-y" checked="true">
+				<label for="teepay_isFee-y">
+				要付费</label>
+				</span></p></section>
+				<section class="typecho-post-option"><label for="teepay_price" class="typecho-label">付费价格（元）</label><p><input id="teepay_price" name="teepay_price" type="text" value="'.$teepay_price.'" class="w-100 text"></p></section>
+				<section class="typecho-post-option"><label for="teepay_content" class="typecho-label">付费可见内容</label><p><textarea id="teepay_content" name="teepay_content" type="text" value="" class="w-100 text">'.$teepay_content.'</textarea></p></section>';
+			
+		}else{			
 		$html = '<section class="typecho-post-option"><label for="teepay_price" class="typecho-label">是否付费</label>
 				<p><span><input name="teepay_isFee" type="radio" value="n" id="teepay_isFee-n" checked="true">
 				<label for="teepay_isFee-n">
@@ -56,6 +70,7 @@ class TeePay_Plugin implements Typecho_Plugin_Interface{
 				</span></p></section>
 				<section class="typecho-post-option"><label for="teepay_price" class="typecho-label">付费价格（元）</label><p><input id="teepay_price" name="teepay_price" type="text" value="'.$teepay_price.'" class="w-100 text"></p></section>
 				<section class="typecho-post-option"><label for="teepay_content" class="typecho-label">付费可见内容</label><p><textarea id="teepay_content" name="teepay_content" type="text" value="" class="w-100 text">'.$teepay_content.'</textarea></p></section>';
+		}
 		_e($html);
 	}
 	/**
@@ -110,20 +125,22 @@ class TeePay_Plugin implements Typecho_Plugin_Interface{
      */
     public static function getTeePay()
     {
+      	include('libs/Parsedown.php');
+    	$Parsedown = new Parsedown();
         $db = Typecho_Db::get();
         $cid = Typecho_Widget::widget('Widget_Archive')->cid;
 		$query= $db->select()->from('table.contents')->where('cid = ?', $cid ); 
 		$row = $db->fetchRow($query);
 		if($row['teepay_isFee']=='y'&&$row['authorId']!=Typecho_Cookie::get('__typecho_uid')){
-		if(!isset($_COOKIE["ReadyPayCookie"])){
+		if(!isset($_COOKIE["TeePayCookie"])){
 			$cookietime=$option->teepay_cookietime==""?1:$option->teepay_cookietime;
 			$randomCode = md5(uniqid(microtime(true),true));
-			setcookie("ReadyPayCookie",$randomCode, time()+3600*24*$cookietime);
-			$ReadyPayCookie=$randomCode;
+			setcookie("TeePayCookie",$randomCode, time()+3600*24*$cookietime);
+			$TeePayCookie=$randomCode;
 		}else{
-			$ReadyPayCookie=$_COOKIE["ReadyPayCookie"];
+			$TeePayCookie=$_COOKIE["TeePayCookie"];
 		}
-		$queryItem= $db->select()->from('table.teepay_fees')->where('feecookie = ?', $ReadyPayCookie)->where('feestatus = ?', 1)->where('feecid = ?', $row['cid']); 
+		$queryItem= $db->select()->from('table.teepay_fees')->where('feecookie = ?', $TeePayCookie)->where('feestatus = ?', 1)->where('feecid = ?', $row['cid']); 
 		$rowItem = $db->fetchRow($queryItem);
 		$rowUserItemNum = 0;
 		if(Typecho_Cookie::get('__typecho_uid')){
@@ -133,7 +150,7 @@ class TeePay_Plugin implements Typecho_Plugin_Interface{
 		}
 		if(count($rowItem) != 0 || $rowUserItemNum){ ?>			
 			<div style="background:#f8f8f8;padding:30px 20px;border:1px dashed #ccc;position: relative;z-index:999;margin:15px 0">
-				<span><?php echo $row['teepay_content'] ?></span>
+				<span><?php echo $Parsedown->text($row['teepay_content']) ?></span>
 				<span style="position: absolute;top:5px;left:15px;font-size:90%;color:#90949c;">付费可读</span>
 				<span style="position: absolute;top:8px;right:10px;"><img style="width:22px;" src="https://i.loli.net/2019/04/12/5cb00c4688f8f.png" alt=""></span>
 			</div>
@@ -150,10 +167,10 @@ class TeePay_Plugin implements Typecho_Plugin_Interface{
 					<input type="hidden" name="action" value="paysubmit" />
 					<input type="hidden" id="feecid" name="feecid" value="<?php echo $row['cid'] ?>" />
 					<input type="hidden" id="feeuid" name="feeuid" value="<?php Typecho_Cookie::get('__typecho_uid') ?>" />
-					<input type="hidden" id="feecookie" name="feecookie" value="<?php echo $ReadyPayCookie ?>" />
+					<input type="hidden" id="feecookie" name="feecookie" value="<?php echo $TeePayCookie ?>" />
 				</form>
 				<div style="clear:left;"></div>
-				<span>温馨提示：<span style="color: red">免登录付款支付后1天内可重复阅读隐藏内容，<a href="/signin.html" style="">登录</a></span>用户可永久阅读隐藏的内容。 </span>
+				<span>温馨提示：<span style="color: red">免登录付款后1天内可重复阅读隐藏内容，<a href="/signin.html" style="">登录</a></span>用户付款后可永久阅读隐藏的内容。 </span>
 				<span style="position: absolute;top:5px;left:15px;font-size:90%;color:#90949c;">付费可读</span>
 				<span style="position: absolute;top:8px;right:10px;"><img style="width:22px;" src="https://i.loli.net/2019/04/12/5cb00c4688f8f.png" alt=""></span>
 			</div>
@@ -163,7 +180,7 @@ class TeePay_Plugin implements Typecho_Plugin_Interface{
 		<?php } ?> 
 	<?php }elseif($row['teepay_isFee']=='y'&&$row['authorId']==Typecho_Cookie::get('__typecho_uid')){ ?>			
 		<div style="background:#f8f8f8;padding:30px 20px;border:1px dashed #ccc;position: relative;z-index:999;margin:15px 0">
-			<span><?php echo $row['teepay_content'] ?></span>
+			<span><?php echo $Parsedown->text($row['teepay_content']) ?></span>
 			<span style="position: absolute;top:5px;left:15px;font-size:90%;color:#90949c;">付费可读</span>
 			<span style="position: absolute;top:8px;right:10px;"><img style="width:22px;" src="https://i.loli.net/2019/04/12/5cb00c4688f8f.png" alt=""></span>
 		</div>
