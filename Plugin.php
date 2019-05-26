@@ -254,7 +254,7 @@ class TeePay_Plugin implements Typecho_Plugin_Interface{
 		  `feetype` enum("alipay","wxpay","wx","WEIXIN_DAIXIAO","qqpay","bank_pc","tlepay") COLLATE utf8_general_ci DEFAULT "alipay",
 		  `feestatus` smallint(2) DEFAULT "0" COMMENT "订单状态：0、未付款；1、付款成功；2、付款失败",
 		  `feeinstime` datetime DEFAULT NULL,
-		  `feecookie` varchar(64) COLLATE utf8_general_ci DEFAULT NULL,
+		  `feecookie` varchar(255) COLLATE utf8_general_ci DEFAULT NULL,
 		  PRIMARY KEY (`feeid`)
 		) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;');
 	}
@@ -275,8 +275,8 @@ class TeePay_Plugin implements Typecho_Plugin_Interface{
 						'n', _t('是否需付费*'));		
 		$form->addInput($teepay_isFee);
 		
-		/** 付费情况 */
-		$teepay_price = new Typecho_Widget_Helper_Form_Element_Text('teepay_price', NULL, NULL, _t('付费情况*'));
+		/** 付费价格 */
+		$teepay_price = new Typecho_Widget_Helper_Form_Element_Text('teepay_price', NULL, NULL, _t('付费价格（元）*'));
 		$form->addInput($teepay_price);
 		
 		/** 付费可见内容 */
