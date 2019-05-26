@@ -1,8 +1,4 @@
 function teepayPayPost() {
-	if($("#teepay_islogin")=="y"&&$("#feeuid").val()==""){
-		layer.msg("需要先登录");
-		return false;
-	}
 	var str = "确认要付款购买吗？";
 	layer.confirm(str, {
 		btn: ["付款","算了"]

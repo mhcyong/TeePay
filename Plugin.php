@@ -4,7 +4,7 @@
  * @package TeePay For Typecho
  * @author 小否先生
  * @version 1.0.9
- * @link http://www.vfaxian.com/
+ * @link https://vfaxian.com/
  * @date 2019-04-07
  */
 class TeePay_Plugin implements Typecho_Plugin_Interface{
@@ -12,7 +12,6 @@ class TeePay_Plugin implements Typecho_Plugin_Interface{
     public static function activate(){
 		Helper::addPanel(3, 'TeePay/manage-posts.php', '文章付费', '管理文章付费', 'administrator');
 		Helper::addAction('teepay-post-edit', 'TeePay_Action');
-		Typecho_Plugin::factory('admin/write-post.php')->bottom = array('TeePay_Plugin', 'tleTeePayToolbar');
 		Typecho_Plugin::factory('Widget_Archive')->footer = array('TeePay_Plugin', 'footer');
 		//后台增加字段
 		Typecho_Plugin::factory('admin/write-post.php')->option = array(__CLASS__, 'setFeeContent');
@@ -25,11 +24,8 @@ class TeePay_Plugin implements Typecho_Plugin_Interface{
 		self::alterColumn($db,$prefix.'contents','teepay_price','double(10,2) DEFAULT 0');
 		self::alterColumn($db,$prefix.'contents','teepay_content','text');
 		self::alterColumn($db,$prefix.'users','teepay_money','double(10,2) DEFAULT 0');
-		self::alterColumn($db,$prefix.'users','teepay_point','int(11) DEFAULT 0');
+		self::alterColumn($db,$prefix.'users','teepay_point','int(11) DEFAULT 0');	
 		self::createTableTeePayFee($db);
-		
-		self::alterColumn($db,$prefix.'teepay_fees','feecookie','varchar(255) DEFAULT NULL');
-		self::alterColumn($db,$prefix.'contents','teepay_islogin','enum("y","n") DEFAULT "n"');
 		
         return _t('插件已经激活，需先配置插件信息！');
     }
@@ -232,16 +228,7 @@ class TeePay_Plugin implements Typecho_Plugin_Interface{
 		$payjs_wxpay_key = new Typecho_Widget_Helper_Form_Element_Text('payjs_wxpay_key', array('value'), "", _t('payjs通信密钥'), _t('在<a href="https://payjs.cn/" target="_blank">payjs官网</a>注册的通信密钥。'));
         $form->addInput($payjs_wxpay_key);
 		$payjs_wxpay_notify_url = new Typecho_Widget_Helper_Form_Element_Text('payjs_wxpay_notify_url', array('value'), $plug_url.'/TeePay/wxpay_notify_url.php', _t('payjs异步回调接口'), _t('支付完成后异步回调的接口地址。'));
-        $form->addInput($payjs_wxpay_notify_url);
-		//邮件中心
-		$mailsmtp = new Typecho_Widget_Helper_Form_Element_Text('mailsmtp', null, '', _t('smtp服务器(已验证QQ企业邮箱和126邮箱可成功发送)'), _t('用于用户中心发送邮箱验证码及其他邮件服务的smtp服务器地址，QQ企业邮箱：ssl://smtp.exmail.qq.com:465；126邮箱：smtp.126.com:25'));
-        $form->addInput($mailsmtp);
-		$mailport = new Typecho_Widget_Helper_Form_Element_Text('mailport', null, '', _t('smtp服务器端口'), _t('用于用户中心发送邮箱验证码及其他邮件服务的smtp服务器端口'));
-        $form->addInput($mailport);
-		$mailuser = new Typecho_Widget_Helper_Form_Element_Text('mailuser', null, '', _t('smtp服务器邮箱用户名'), _t('用于用户中心发送邮箱验证码及其他邮件服务的smtp服务器邮箱用户名'));
-        $form->addInput($mailuser);
-		$mailpass = new Typecho_Widget_Helper_Form_Element_Password('mailpass', null, '', _t('smtp服务器邮箱密码'), _t('用于用户中心发送邮箱验证码及其他邮件服务的smtp服务器邮箱密码'));
-        $form->addInput($mailpass);				
+        $form->addInput($payjs_wxpay_notify_url);	
     }
 
     // 个人用户配置面板
@@ -253,66 +240,12 @@ class TeePay_Plugin implements Typecho_Plugin_Interface{
         return Typecho_Widget::widget('Widget_Options')->plugin('TeePay');
     }
 	
-	
-	/*发送给管理员邮件通知*/
-	public static function sendMail($email,$title,$content){
-		require __DIR__ . '/libs/email.class.php';
-		$options = Typecho_Widget::widget('Widget_Options');
-		$option=$options->plugin('TeePay');
-		$smtpserverport =$option->mailport;//SMTP服务器端口//企业QQ:465、126:25
-		$smtpserver = $option->mailsmtp;//SMTP服务器//QQ:ssl://smtp.qq.com、126:smtp.126.com
-		$smtpusermail = $option->mailuser;//SMTP服务器的用户邮箱
-		$smtpemailto = $email;//发送给谁
-		$smtpuser = $option->mailuser;//SMTP服务器的用户帐号
-		$smtppass = $option->mailpass;//SMTP服务器的用户密码
-		$mailtitle = $title;//邮件主题
-		$mailcontent = $content;//邮件内容
-		$mailtype = "HTML";//邮件格式（HTML/TXT）,TXT为文本邮件
-		//************************ 配置信息 ****************************
-		$smtp = new smtp($smtpserver,$smtpserverport,true,$smtpuser,$smtppass);//这里面的一个true是表示使用身份验证,否则不使用身份验证.
-		$smtp->debug = false;//是否显示发送的调试信息
-		$state = $smtp->sendmail($smtpemailto, $smtpusermail, $mailtitle, $mailcontent, $mailtype);
-		return $state;
-	}
-	
-
-	/**
-     * 后台编辑器添加付费阅读按钮
-     * @access public
-     * @return void
-     */
-	public static function tleTeePayToolbar(){
-		?>
-		<script type="text/javascript">
-			$(function(){
-				if($('#wmd-button-row').length>0){
-					$('#wmd-button-row').append('<li class="wmd-button" id="wmd-button-Forlogin" style="font-size:20px;float:left;color:#AAA;width:16px;" title=登录可见><b>L</b></li>');
-				}else{
-					$('#text').before('<a href="#" id="wmd-button-Forlogin" title="登录可见"><b>L</b></a>');
-				}
-				$(document).on('click', '#wmd-button-Forlogin', function(){
-					$('#text').val($('#text').val()+'\r\n[Forlogin]\r\n\r\n[/Forlogin]');
-				});
-				/*移除弹窗*/
-				if(($('.wmd-prompt-dialog').length != 0) && e.keyCode == '27') {
-					cancelAlert();
-				}
-			});
-			function cancelAlert() {
-				$('.wmd-prompt-dialog').remove()
-			}
-		</script>
-		<?php
-	}
-	
-	
 	public static function footer(){
 		
 	}
   	/*创建支付订单数据表*/
 	public static function createTableTeePayFee($db){
 		$prefix = $db->getPrefix();
-		//$db->query('DROP TABLE IF EXISTS '.$prefix.'weibofile_videoupload');
 		$db->query('CREATE TABLE IF NOT EXISTS `'.$prefix.'teepay_fees` (
 		  `feeid` varchar(64) COLLATE utf8_general_ci NOT NULL,
 		  `feecid` bigint(20) DEFAULT NULL,
@@ -321,6 +254,7 @@ class TeePay_Plugin implements Typecho_Plugin_Interface{
 		  `feetype` enum("alipay","wxpay","wx","WEIXIN_DAIXIAO","qqpay","bank_pc","tlepay") COLLATE utf8_general_ci DEFAULT "alipay",
 		  `feestatus` smallint(2) DEFAULT "0" COMMENT "订单状态：0、未付款；1、付款成功；2、付款失败",
 		  `feeinstime` datetime DEFAULT NULL,
+		  `feecookie` varchar(64) COLLATE utf8_general_ci DEFAULT NULL,
 		  PRIMARY KEY (`feeid`)
 		) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;');
 	}
@@ -344,12 +278,6 @@ class TeePay_Plugin implements Typecho_Plugin_Interface{
 		/** 付费情况 */
 		$teepay_price = new Typecho_Widget_Helper_Form_Element_Text('teepay_price', NULL, NULL, _t('付费情况*'));
 		$form->addInput($teepay_price);
-		
-		/** 是否需登录 */
-		$teepay_islogin = new Typecho_Widget_Helper_Form_Element_Radio('teepay_islogin', 
-						array('n' => _t('免登录'), 'y' => _t('需登录')),
-						'n', _t('是否需登录*'));		
-		$form->addInput($teepay_islogin);
 		
 		/** 付费可见内容 */
 		$teepay_content = new Typecho_Widget_Helper_Form_Element_Textarea('teepay_content', NULL, NULL, _t('付费可见内容*'));
@@ -381,7 +309,6 @@ class TeePay_Plugin implements Typecho_Plugin_Interface{
             $title->value($post['title']);
             $teepay_isFee->value($post['teepay_isFee']);
             $teepay_price->value($post['teepay_price']);
-            $teepay_islogin->value($post['teepay_islogin']);
             $teepay_content->value($post['teepay_content']);
             $do->value('update');
             $cid->value($post['cid']);
