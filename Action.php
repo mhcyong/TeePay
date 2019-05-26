@@ -13,7 +13,7 @@ class TeePay_Action extends Typecho_Widget implements Widget_Interface_Do
 		}
 
 		/** 取出数据 */
-		$post = $this->request->from('cid', 'teepay_isFee', 'teepay_price', 'teepay_content');
+		$post = $this->request->from('cid', 'title', 'teepay_isFee', 'teepay_price', 'teepay_content');
 
 		/** 更新数据 */
 		$this->db->query($this->db->update($this->prefix.'contents')->rows($post)->where('cid = ?', $post['cid']));
