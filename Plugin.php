@@ -243,6 +243,18 @@ class TeePay_Plugin implements Typecho_Plugin_Interface{
 	public static function footer(){
 		
 	}
+
+
+	/*修改数据表字段*/
+	public static function alterColumn($db,$table,$column,$define){
+		$prefix = $db->getPrefix();
+		$query= "select * from information_schema.columns WHERE table_name = '".$table."' AND column_name = '".$column."'";
+		$row = $db->fetchRow($query);
+		if(count($row)==0){
+			$db->query('ALTER TABLE `'.$table.'` ADD COLUMN `'.$column.'` '.$define.';');
+		}
+	}
+
   	/*创建支付订单数据表*/
 	public static function createTableTeePayFee($db){
 		$prefix = $db->getPrefix();
@@ -258,6 +270,7 @@ class TeePay_Plugin implements Typecho_Plugin_Interface{
 		  PRIMARY KEY (`feeid`)
 		) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;');
 	}
+	
 	public static function form($action = NULL)
 	{
 		/** 构建表格 */
