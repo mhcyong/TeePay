@@ -187,22 +187,6 @@ class TeePay_Plugin implements Typecho_Plugin_Interface{
 		//删除页面模板		
 		Helper::removeAction('teepay-post-edit');
 		Helper::removePanel(3, 'TeePay/manage-posts.php');
-		Helper::removeAction('teepay-post-edit');
-		Helper::removePanel(3, 'TeePay/manage-posts.php');
-		Helper::removeAction('teepay-post-edit');
-		Helper::removePanel(3, 'TeePay/manage-posts.php');
-		Helper::removeAction('teepay-post-edit');
-		Helper::removePanel(3, 'TeePay/manage-posts.php');
-		Helper::removeAction('teepay-post-edit');
-		Helper::removePanel(3, 'TeePay/manage-posts.php');
-		Helper::removeAction('teepay-post-edit');
-		Helper::removePanel(3, 'TeePay/manage-posts.php');
-		Helper::removeAction('teepay-post-edit');
-		Helper::removePanel(3, 'TeePay/manage-posts.php');
-		Helper::removeAction('teepay-post-edit');
-		Helper::removePanel(3, 'TeePay/manage-posts.php');
-		Helper::removeAction('teepay-post-edit');
-		Helper::removePanel(3, 'TeePay/manage-posts.php');
         return _t('插件已被禁用');
     }
 
