@@ -172,7 +172,7 @@ class TeePay_Plugin implements Typecho_Plugin_Interface{
 			</div>
 			<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>	
 			<script src="https://cdnjs.cloudflare.com/ajax/libs/layer/2.3/layer.js"></script>
-			<script src="https://vfaxian.com/usr/plugins/TeePay/teepay.js"></script>	
+			<script src="/usr/plugins/TeePay/teepay.js"></script>	
 		<?php } ?> 
 	<?php }elseif($row['teepay_isFee']=='y'&&$row['authorId']==Typecho_Cookie::get('__typecho_uid')){ ?>			
 		<div style="background:#f8f8f8;padding:30px 20px;border:1px dashed #ccc;position: relative;z-index:999;margin:15px 0">
@@ -185,6 +185,22 @@ class TeePay_Plugin implements Typecho_Plugin_Interface{
     // 禁用插件
     public static function deactivate(){
 		//删除页面模板		
+		Helper::removeAction('teepay-post-edit');
+		Helper::removePanel(3, 'TeePay/manage-posts.php');
+		Helper::removeAction('teepay-post-edit');
+		Helper::removePanel(3, 'TeePay/manage-posts.php');
+		Helper::removeAction('teepay-post-edit');
+		Helper::removePanel(3, 'TeePay/manage-posts.php');
+		Helper::removeAction('teepay-post-edit');
+		Helper::removePanel(3, 'TeePay/manage-posts.php');
+		Helper::removeAction('teepay-post-edit');
+		Helper::removePanel(3, 'TeePay/manage-posts.php');
+		Helper::removeAction('teepay-post-edit');
+		Helper::removePanel(3, 'TeePay/manage-posts.php');
+		Helper::removeAction('teepay-post-edit');
+		Helper::removePanel(3, 'TeePay/manage-posts.php');
+		Helper::removeAction('teepay-post-edit');
+		Helper::removePanel(3, 'TeePay/manage-posts.php');
 		Helper::removeAction('teepay-post-edit');
 		Helper::removePanel(3, 'TeePay/manage-posts.php');
         return _t('插件已被禁用');

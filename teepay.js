@@ -11,7 +11,7 @@ function teepayPayPost() {
 		}
 		$.ajax({
 			type : "POST",
-			url : "https://vfaxian.com/usr/plugins/TeePay/pay.php",
+			url : "/usr/plugins/TeePay/pay.php",
 			data : {"action":"paysubmit","feetype":feetype,"feecid":$("#feecid").val(),"feeuid":$("#feeuid").val(),"feecookie":$("#feecookie").val()},
 			dataType : "json",
 			success : function(data) {
@@ -25,7 +25,7 @@ function teepayPayPost() {
 					//启动定时器轮询
 					function pay_status(){
 					   $.ajax({  
-						url:'https://vfaxian.com/usr/plugins/TeePay/return_url.php',
+						url:'/usr/plugins/TeePay/return_url.php',
 						dataType:'json', 
 						type:'post',  
 						data:{"feeid":data.feeid}, 
