@@ -142,7 +142,9 @@ class TeePay_Plugin implements Typecho_Plugin_Interface{
 		if(Typecho_Cookie::get('__typecho_uid')){
 			$queryUserItem= $db->select()->from('table.teepay_fees')->where('feeuid = ?', Typecho_Cookie::get('__typecho_uid'))->where('feestatus = ?', 1)->where('feecid = ?', $row['cid']); 
 			$rowUserItem = $db->fetchRow($queryUserItem);
-			$rowUserItemNum = 1;
+			if(!empty($rowUserItem)){
+				$rowUserItemNum = 1;
+			}
 		}
 		if(count($rowItem) != 0 || $rowUserItemNum){ ?>			
 			<div style="background:#f8f8f8;padding:30px 20px;border:1px dashed #ccc;position: relative;z-index:999;margin:15px 0">
