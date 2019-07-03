@@ -124,6 +124,8 @@ class TeePay_Plugin implements Typecho_Plugin_Interface{
       	include('libs/Parsedown.php');
     	$Parsedown = new Parsedown();
         $db = Typecho_Db::get();
+		$options = Typecho_Widget::widget('Widget_Options');
+		$option=$options->plugin('TeePay');
         $cid = Typecho_Widget::widget('Widget_Archive')->cid;
 		$query= $db->select()->from('table.contents')->where('cid = ?', $cid ); 
 		$row = $db->fetchRow($query);
@@ -154,9 +156,17 @@ class TeePay_Plugin implements Typecho_Plugin_Interface{
 			</div>
 		<?php }else{ ?>	
 			<div style="background:#f8f8f8;padding:30px 20px;border:1px dashed #ccc;position: relative;text-align:center;margin:15px 0;">
-				<form id="teepayPayPost" onsubmit="return false" action="##" method="post" style="margin:10px 0;">						
+				<form id="teepayPayPost" onsubmit="return false" action="##" method="post" style="margin:10px 0;">
+					<?php if($option->show_Alipay_Wxpay == "all"){ ?>
 					<input type="radio" id="feetype1" name="feetype" value="alipay">支付宝支付
 					<input type="radio" id="feetype2" name="feetype" value="wxpay" checked>微信支付
+					<?php }elseif($option->show_Alipay_Wxpay == "alipay"){?>					
+					<input type="radio" id="feetype1" name="feetype" value="alipay" checked>支付宝支付
+					<input type="radio" id="feetype2" name="feetype" value="wxpay" style="display:none;">
+					<?php }elseif($option->show_Alipay_Wxpay == "wxpay"){?>	
+					<input type="radio" id="feetype1" name="feetype" value="alipay" style="display:none;">
+					<input type="radio" id="feetype2" name="feetype" value="wxpay" checked>微信支付
+					<?php } ?>
 					<div style="clear:left;"></div>
 					<div style="height:34px;line-height:34px;border:none;-moz-border-radius: 0px;-webkit-border-radius: 0px;border-radius:0px;">
 					价格： <?php echo $row['teepay_price'] ?> 元
@@ -231,6 +241,9 @@ class TeePay_Plugin implements Typecho_Plugin_Interface{
         $form->addInput($payjs_wxpay_key);
 		$payjs_wxpay_notify_url = new Typecho_Widget_Helper_Form_Element_Text('payjs_wxpay_notify_url', array('value'), $plug_url.'/TeePay/wxpay_notify_url.php', _t('payjs异步回调接口'), _t('支付完成后异步回调的接口地址。'));
         $form->addInput($payjs_wxpay_notify_url);	
+		//设置显示微信，支付宝，还是全部都显示
+		$show_Alipay_Wxpay= new Typecho_Widget_Helper_Form_Element_Radio('show_Alipay_Wxpay',array('all' => _t('全部方式'),'alipay' => _t('仅支付宝'),'wxpay' => _t('仅微信支付')),'all',_t('支付方式'),_t("选择需要开启的支付方式，默认支付宝和微信两种方式。"));
+		$form->addInput($show_Alipay_Wxpay);
     }
 
     // 个人用户配置面板
