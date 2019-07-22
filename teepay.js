@@ -57,7 +57,7 @@ function teepayPayPost() {
 				}else{
 					str="<center><div>请求支付过程出了一点小问题，稍后重试一次吧！</div></center>";
 				}							
-				layer.confirm(str, {
+				layer.alert(str, {
 					btn: ["算了"]
 				},function(index){
 					layer.close(index);

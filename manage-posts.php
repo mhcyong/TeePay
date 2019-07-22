@@ -23,7 +23,7 @@ li.am-pagination-next {
 </style>
 <?php 
 	$db = Typecho_Db::get();
-	$queryPosts= $db->select()->from('table.contents'); 
+	$queryPosts= $db->select()->from('table.contents')->where('teepay_isFee = ?', "y"); 
 	$page_now = isset($_GET['page_now']) ? intval($_GET['page_now']) : 1;
 	if($page_now<1){
 		$page_now=1;
@@ -51,7 +51,7 @@ li.am-pagination-next {
 		}
 	}
 	$i=($page_now-1)*$page_rec<0?0:($page_now-1)*$page_rec;
-	$queryGoods= $db->select()->from('table.contents')->order('table.contents.modified',Typecho_Db::SORT_DESC)->offset($i)->limit($page_rec); 
+	$queryGoods= $db->select()->from('table.contents')->where('teepay_isFee = ?', "y")->order('table.contents.modified',Typecho_Db::SORT_DESC)->offset($i)->limit($page_rec); 
 	$rowGoods = $db->fetchAll($queryGoods);
 ?>
 <div class="main">
@@ -100,16 +100,16 @@ li.am-pagination-next {
 					  <div class="am-fr">
 						<ul class="am-pagination blog-pagination">
 						  <?php if($page_now!=1){?>
-							<li class="am-pagination-prev"><a href="<?=$url;?>?panel=TeePay%2Fmanage-posts.php&page_now=1">首页</a></li>
+							<li class="am-pagination-prev"><a href="<?=$url;?>?panel=TeePay%2Fmanage-posts.php&page_now=1" target="_self">首页</a></li>
 						  <?php }?>
 						  <?php if($page_now>1){?>
-							<li class="am-pagination-prev"><a href="<?=$url;?>?panel=TeePay%2Fmanage-posts.php&page_now=<?=$before_page;?>">&laquo; 上一页</a></li>
+							<li class="am-pagination-prev"><a href="<?=$url;?>?panel=TeePay%2Fmanage-posts.php&page_now=<?=$before_page;?>" target="_self">&laquo; 上一页</a></li>
 						  <?php }?>
 						  <?php if($page_now<$page){?>
-							<li class="am-pagination-next"><a href="<?=$url;?>?panel=TeePay%2Fmanage-posts.php&page_now=<?=$after_page;?>">下一页 &raquo;</a></li>
+							<li class="am-pagination-next"><a href="<?=$url;?>?panel=TeePay%2Fmanage-posts.php&page_now=<?=$after_page;?>" target="_self">下一页 &raquo;</a></li>
 						  <?php }?>
 						  <?php if($page_now!=$page){?>
-							<li class="am-pagination-next"><a href="<?=$url;?>?panel=TeePay%2Fmanage-posts.php&page_now=<?=$page;?>">尾页</a></li>
+							<li class="am-pagination-next"><a href="<?=$url;?>?panel=TeePay%2Fmanage-posts.php&page_now=<?=$page;?>" target="_self">尾页</a></li>
 						  <?php }?>
 						</ul>
 					  </div>
