@@ -3,14 +3,16 @@
  * TeePayForTypecho自媒体付费阅读插件
  * @package TeePay For Typecho
  * @author 小否先生
- * @version 1.0.9
+ * @version 1.1.0
  * @link https://vfaxian.com/
  * @date 2019-04-07
  */
 class TeePay_Plugin implements Typecho_Plugin_Interface{
     // 激活插件
     public static function activate(){
-		Helper::addPanel(3, 'TeePay/manage-posts.php', '文章付费', '管理文章付费', 'administrator');
+        $index = Helper::addMenu('文章付费');
+        Helper::addPanel($index, 'TeePay/manage-posts.php', '文章付费', '管理付费文章', 'administrator');
+        Helper::addPanel($index, 'TeePay/manage-paylist.php', '付费记录', '付费情况记录', 'administrator');
 		Helper::addAction('teepay-post-edit', 'TeePay_Action');
 		Typecho_Plugin::factory('Widget_Archive')->footer = array('TeePay_Plugin', 'footer');
 		//后台增加字段
