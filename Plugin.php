@@ -198,9 +198,10 @@ class TeePay_Plugin implements Typecho_Plugin_Interface{
     }
     // 禁用插件
     public static function deactivate(){
-		//删除页面模板		
+		//删除页面模板	
+		$index = Helper::removeMenu('文章付费');		
 		Helper::removeAction('teepay-post-edit');
-		Helper::removePanel(3, 'TeePay/manage-posts.php');
+		Helper::removePanel($index, 'TeePay/manage-posts.php');
         return _t('插件已被禁用');
     }
 
