@@ -180,7 +180,7 @@ class TeePay_Plugin implements Typecho_Plugin_Interface{
 					<input type="hidden" id="feecookie" name="feecookie" value="<?php echo $TeePayCookie ?>" />
 				</form>
 				<div style="clear:left;"></div>
-				<span>温馨提示：<span style="color: red">免登录付款后1天内可重复阅读隐藏内容，<a href="/signin.html" style="">登录</a></span>用户付款后可永久阅读隐藏的内容。 </span>
+				<span>温馨提示：<span style="color: red">免登录付款后1天内可重复阅读隐藏内容，<a href="<?php $options->adminUrl(); ?>" style="">登录</a></span>用户付款后可永久阅读隐藏的内容。 </span>
 				<span style="position: absolute;top:5px;left:15px;font-size:90%;color:#90949c;">付费可读</span>
 				<span style="position: absolute;top:8px;right:10px;"><img style="width:22px;" src="https://i.loli.net/2019/04/12/5cb00c4688f8f.png" alt=""></span>
 			</div>
