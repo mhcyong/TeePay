@@ -11,12 +11,13 @@ Typecho 个人支付宝、微信收款插件
 1、forlove：https://1345708774.top/archives/39/  
 2、梁晓斌：https://www.liangxiaobin.com/child/99/  
 3、猫先生的个人博客：https://www.mr-mao.cn/archives/gen2-thinksystem-server-install-2008r2.html  
+4、如烟若梦：https://abcdl.cn/archives/7/  
 
 
 
 ## 注意事项 ##
 1、支付宝支付注意是应用私钥，支付宝公钥。  
-2、使用这个插件网站必须只根目录，二级目录无效，如果一定要只二级目录请自行修改引用文件路劲。  
+2、使用这个插件网站必须只根目录，二级目录无效，如果一定要在二级目录请自行修改引用文件路劲。  
 3、只适用个人支付宝（需签约当面付收单，免费）和个人微信（需在 [payjs.cn](https://payjs.cn/ref/ZEWYMZ) 开通个人微商户，费用300元）。  
 4、因违法被封，或服务器在国外不能收到支付宝回调通知的无法使用。
 
