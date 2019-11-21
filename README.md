@@ -13,6 +13,7 @@ Typecho 个人支付宝、微信收款插件
 3、猫先生的个人博客：https://www.mr-mao.cn/archives/gen2-thinksystem-server-install-2008r2.html  
 4、如烟若梦：https://abcdl.cn/archives/7/   
 5、憶の年：https://www.529i.com/archives/801.html   
+6、kali博客：https://blog.bbskali.cn/index.php/archives/1504/  
 
 
 
