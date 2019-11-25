@@ -4,7 +4,7 @@ Typecho 个人支付宝、微信收款插件
 插件下载地址：https://github.com/mhcyong/TePay.git  
 演示地址：https://pangsuan.com/p/teepay.html  
 推荐个人微信收款平台：https://payjs.cn/ref/ZEWYMZ  
-
+专业版 [TePay-Pro](https://pangsuan.com/p/tepay-pro.html) 
 
 
 ## 效果演示 ##
@@ -16,6 +16,11 @@ Typecho 个人支付宝、微信收款插件
 6、kali博客：https://blog.bbskali.cn/index.php/archives/1504/  
 
 
+## TePay 专业版（TePay-Pro）更新记录 ##
+2019-11-25：因支付宝当面付不播报，故采用Server酱来推送支付成功消息到微信；为了保护我和专业版用户的利益，对少部分核心代码进行加密，不会影响二次修改，开发等等操作。  
+2019-11-24：更新TePay-Pro到3.0.0版本，去掉了一些不需要的功能，也听取了已购买专业版用户的意见，增加一些功能，比如订单标题可以单独修改。  
+2019-11-21：在订单表中增加文章标题的字段，方便直接从数据表查看，也减轻了数据查询的压力。  
+
 
 ## 注意事项 ##
 1、支付宝支付注意是应用私钥，支付宝公钥。  
@@ -25,7 +30,7 @@ Typecho 个人支付宝、微信收款插件
 
 
 
-## 修改记录 ##
+## TePay 基础版修改记录 ##
 2019-11-05：更改插件名称为TePay，此插件不再进行大的功能变更，如有需要请了解专业版 [TePay-Pro](https://pangsuan.com/p/tepay-pro.html) 。     
 2019-10-16: 将PC与手机端分开，手机端只保留支付宝支付，因为可以直接跳转到支付宝付款；微信在手机端没有找到好的方式，故先去掉。  
 2019-10-15: 去掉付费内容里面Parsedown.php及相关代码，减少因主题问题带来的冲突。  
