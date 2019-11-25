@@ -15,7 +15,7 @@ Typecho 个人支付宝、微信收款插件
 6、kali博客：https://blog.bbskali.cn/index.php/archives/1504/  
 
 
-## TePay 专业版（[TePay-Pro](https://pangsuan.com/p/tepay-pro.html) ）更新记录 ##
+## TePay 专业版（[TePay-Pro](https://pangsuan.com/p/tepay-pro.html)）更新记录 ##
 2019-11-25：因支付宝当面付不播报，故采用Server酱来推送支付成功消息到微信；为了保护我和专业版用户的利益，对少部分核心代码进行加密，不会影响二次修改，开发等等操作。  
 2019-11-24：更新TePay-Pro到3.0.0版本，去掉了一些不需要的功能，也听取了已购买专业版用户的意见，增加一些功能，比如订单标题可以单独修改。  
 2019-11-21：在订单表中增加文章标题的字段，方便直接从数据表查看，也减轻了数据查询的压力。  
