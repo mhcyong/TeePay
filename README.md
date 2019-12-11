@@ -14,9 +14,12 @@ Typecho 个人支付宝、微信收款插件
 4、如烟若梦：https://abcdl.cn/archives/7/   
 5、憶の年：https://www.529i.com/archives/801.html   
 6、kali博客：https://blog.bbskali.cn/index.php/archives/1504/  
+7、AppleID中文网： https://applecn.cc/appleid.html  
+8、菜仔卢的不老阁： http://www.iysky.com/say/580.html  
 
 
 ## TePay 专业版（[TePay-Pro](https://pangsuan.com/p/tepay-pro.html)）更新记录 ##
+2019-12-11：移动端的个人收款之前因为一些原因只保留了支付宝唤醒APP付款，现在还是把微信二维码收款也加上吧。  
 2019-12-10：听取用户的意见，给 [独立页面也增加了收款功能](https://pangsuan.com/p/tepay-for-page.html) ，好的建议我都会考虑的，专业版用户放心吧~~  
 2019-12-07：完善管理后台更新文章付费，删除付费文章时的提醒通知。  
 2019-12-02: 为了方便删除不需要的付费设置，在编辑文章页面和付费文章管理页面都增加了删除付费设置的操作。  
