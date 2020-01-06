@@ -205,6 +205,7 @@ class TePay_Plugin implements Typecho_Plugin_Interface{
 		Helper::removeAction('tepay-post-edit');
 		Helper::removePanel($index, 'TePay/manage/posts.php');
 		Helper::removePanel($index, 'TePay/manage/paylist.php');
+		Helper::removePlugin('TePay');
         return _t('插件已被禁用');
     }
 

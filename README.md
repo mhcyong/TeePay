@@ -8,7 +8,7 @@ Typecho 个人支付宝、微信收款插件
 
 
 ## 效果演示 ##
-1、forlove：https://1345708774.top/archives/39/  
+1、仰泳の猪：https://zbqbk.cn/index.php/archives/128.html  
 2、梁晓斌：https://www.liangxiaobin.com/child/99/  
 3、猫先生的个人博客：https://www.mr-mao.cn/archives/gen2-thinksystem-server-install-2008r2.html  
 4、如烟若梦：https://abcdl.cn/archives/7/   
