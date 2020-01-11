@@ -16,7 +16,8 @@ Typecho 个人支付宝、微信收款插件
 6、kali博客：https://blog.bbskali.cn/index.php/archives/1504/  
 7、AppleID中文网： https://applecn.cc/appleid.html  
 8、菜仔卢的不老阁： http://www.iysky.com/say/580.html  
-9、木稚隐语： https://wbessy.com/Pay.html  
+9、木稚隐语： https://wbessy.com/Pay.html   
+10、太阳源码： https://ym.sundg.top/archives/5/   
 
 
 ## TePay 专业版（[TePay-Pro](https://pangsuan.com/p/tepay-pro.html)）更新记录 ##
