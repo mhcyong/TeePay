@@ -3,7 +3,7 @@
  * TePayForTypecho自媒体付费阅读插件
  * @package TePay For Typecho
  * @author 小否先生
- * @version 1.5.0
+ * @version 1.5.1
  * @link https://pangsuan.com/
  * @date 2019-04-07
  */
@@ -11,9 +11,9 @@ class TePay_Plugin implements Typecho_Plugin_Interface{
     // 激活插件
     public static function activate(){
         $index = Helper::addMenu('文章付费');
+		Helper::addAction('tepay-post-edit', 'TePay_Action');
         Helper::addPanel($index, 'TePay/manage/posts.php', '文章付费', '管理付费文章', 'administrator');
         Helper::addPanel($index, 'TePay/manage/paylist.php', '付费记录', '付费情况记录', 'administrator');
-		Helper::addAction('tepay-post-edit', 'TePay_Action');
 		Typecho_Plugin::factory('Widget_Archive')->footer = array('TePay_Plugin', 'footer');
 		//后台增加字段
 		Typecho_Plugin::factory('admin/write-post.php')->option = array(__CLASS__, 'setFeeContent');
@@ -30,6 +30,16 @@ class TePay_Plugin implements Typecho_Plugin_Interface{
 		self::createTableTePayFee($db);
 		
         return _t('插件已经激活，需先配置插件信息！');
+    }
+	
+    // 禁用插件
+    public static function deactivate(){
+		//删除页面模板	
+		$index = Helper::removeMenu('文章付费');		
+		Helper::removeAction('tepay-post-edit');
+		Helper::removePanel($index, 'TePay/manage/posts.php');
+		Helper::removePanel($index, 'TePay/manage/paylist.php');
+        return _t('插件已被禁用');
     }
 	/**
 	 * 把付费内容设置装入文章编辑页
@@ -197,17 +207,6 @@ class TePay_Plugin implements Typecho_Plugin_Interface{
 		}
     }
 	
-	
-    // 禁用插件
-    public static function deactivate(){
-		//删除页面模板	
-		$index = Helper::removeMenu('文章付费');		
-		Helper::removeAction('tepay-post-edit');
-		Helper::removePanel($index, 'TePay/manage/posts.php');
-		Helper::removePanel($index, 'TePay/manage/paylist.php');
-		Helper::removePlugin('TePay');
-        return _t('插件已被禁用');
-    }
 
     // 插件配置面板
     public static function config(Typecho_Widget_Helper_Form $form){
