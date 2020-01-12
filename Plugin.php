@@ -15,11 +15,12 @@ class TePay_Plugin implements Typecho_Plugin_Interface{
         Helper::addPanel($index, 'TePay/manage/posts.php', '文章付费', '管理付费文章', 'administrator');
         Helper::addPanel($index, 'TePay/manage/paylist.php', '付费记录', '付费情况记录', 'administrator');
 		Typecho_Plugin::factory('Widget_Archive')->footer = array('TePay_Plugin', 'footer');
-		//后台增加字段
+		
 		Typecho_Plugin::factory('admin/write-post.php')->option = array(__CLASS__, 'setFeeContent');
 		Typecho_Plugin::factory('Widget_Contents_Post_Edit')->finishPublish = array(__CLASS__, "updateFeeContent");
 		Typecho_Plugin::factory('Widget_Archive')->select = array(__CLASS__, 'selectHandle');
 		
+		//后台增加字段
 		$db = Typecho_Db::get();
 		$prefix = $db->getPrefix();
 		self::alterColumn($db,$prefix.'contents','tepay_isFee','enum("y","n") DEFAULT "n"');
@@ -34,7 +35,6 @@ class TePay_Plugin implements Typecho_Plugin_Interface{
 	
     // 禁用插件
     public static function deactivate(){
-		//删除页面模板	
 		$index = Helper::removeMenu('文章付费');		
 		Helper::removeAction('tepay-post-edit');
 		Helper::removePanel($index, 'TePay/manage/posts.php');
@@ -207,14 +207,12 @@ class TePay_Plugin implements Typecho_Plugin_Interface{
 		}
     }
 	
-
     // 插件配置面板
     public static function config(Typecho_Widget_Helper_Form $form){
 		$db = Typecho_Db::get();
 		$prefix = $db->getPrefix();
 		$options = Typecho_Widget::widget('Widget_Options');
 		$plug_url = $options->pluginUrl;
-		//版本检查
 		$div=new Typecho_Widget_Helper_Layout();
 		$div->html('<small>		
 			<h6>基础功能</h6>
