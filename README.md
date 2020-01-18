@@ -6,7 +6,7 @@ Typecho 个人支付宝、微信收款插件
 插件下载地址：https://github.com/mhcyong/TeePay.git  
 插件介绍：https://pangsuan.com/p/teepay.html  
 演示地址：https://pangsuan.com/p/show-how.html  
-推荐个人微信收款平台：https://payjs.cn/ref/ZEWYMZ  
+推荐个人微信收款平台：https://payjs.cn/ref/zgpnbd    
 
 ## 特别提醒 ##
 TeePay-Pro 4.0的版本从2020年1月1日开始已在官网使用，计划2月1日正式发布，升级会加价，但在2月1日发布前购买专业版的用户，都可以免费升级，享受永久升级的服务。  
