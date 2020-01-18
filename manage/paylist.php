@@ -21,7 +21,7 @@ li.am-pagination-next {
 </style>
 <?php 
 	$db = Typecho_Db::get();
-	$queryGoods= $db->select()->from('table.tepay_fees')->join('table.contents', 'table.contents.cid = table.tepay_fees.feecid', Typecho_Db::LEFT_JOIN)->join('table.users', 'table.users.uid = table.tepay_fees.feeuid', Typecho_Db::LEFT_JOIN)->order('table.tepay_fees.feeid',Typecho_Db::SORT_DESC)->limit(15); 
+	$queryGoods= $db->select()->from('table.teepay_fees')->join('table.contents', 'table.contents.cid = table.teepay_fees.feecid', Typecho_Db::LEFT_JOIN)->join('table.users', 'table.users.uid = table.teepay_fees.feeuid', Typecho_Db::LEFT_JOIN)->order('table.teepay_fees.feeid',Typecho_Db::SORT_DESC)->limit(15); 
 	$rowGoods = $db->fetchAll($queryGoods);
 ?>
 <div class="main">

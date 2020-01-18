@@ -21,7 +21,7 @@ li.am-pagination-next {
 </style>
 <?php 
 	$db = Typecho_Db::get();
-	$queryGoods= $db->select()->from('table.contents')->where('tepay_isFee = ?', "y")->order('table.contents.modified',Typecho_Db::SORT_DESC)->limit(5); 
+	$queryGoods= $db->select()->from('table.contents')->where('teepay_isFee = ?', "y")->order('table.contents.modified',Typecho_Db::SORT_DESC)->limit(5); 
 	$rowGoods = $db->fetchAll($queryGoods);
 ?>
 <div class="main">
@@ -52,7 +52,7 @@ li.am-pagination-next {
                                 <td><a href="<?php echo $request->makeUriByRequest('cid='.$value["cid"]); ?>" title="点击编辑"><?php echo $value["title"]; ?></a>
                                 <td>
 								<?php 
-								echo $value["tepay_price"];
+								echo $value["teepay_price"];
 								?>
 								</td>		
                             </tr>
