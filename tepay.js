@@ -1,4 +1,4 @@
-function tepayPayPost() {
+function teepayPayPost() {
 	if(document.getElementById("feetype1").checked){
 		var feetype = "alipay";
 	}else{
@@ -6,7 +6,7 @@ function tepayPayPost() {
 	}
 	$.ajax({
 		type : "POST",
-		url : "/usr/plugins/TePay/pay.php",
+		url : "/usr/plugins/TeePay/pay.php",
 		data : {"action":"paysubmit","feetype":feetype,"feecid":$("#feecid").val(),"feeuid":$("#feeuid").val(),"feecookie":$("#feecookie").val()},
 		dataType : "json",
 		success : function(data) {
@@ -31,7 +31,7 @@ function tepayPayPost() {
 				//启动定时器轮询
 				function pay_status(){
 				   $.ajax({  
-					url:'/usr/plugins/TePay/return_url.php',
+					url:'/usr/plugins/TeePay/return_url.php',
 					dataType:'json', 
 					type:'post',  
 					data:{"feeid":data.feeid}, 

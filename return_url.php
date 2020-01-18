@@ -8,11 +8,11 @@ $prefix = $db->getPrefix();
 date_default_timezone_set('Asia/Shanghai');
 
 $options = Typecho_Widget::widget('Widget_Options');
-$option=$options->plugin('TePay');
+$option=$options->plugin('TeePay');
 $plug_url = $options->pluginUrl;
 
 $feeid = isset($_POST['feeid']) ? addslashes($_POST['feeid']) : '';
-$queryContent= $db->select()->from('table.tepay_fees')->where('feeid = ?', $feeid); 
+$queryContent= $db->select()->from('table.teepay_fees')->where('feeid = ?', $feeid); 
 $rowContent = $db->fetchRow($queryContent);
 	
 $json=json_encode(array("feestatus"=>$rowContent['feestatus'],"feeid"=>$feeid));
