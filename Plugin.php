@@ -1,9 +1,9 @@
 <?php
 /**
- * TeePayForTypecho自媒体付费阅读插件
+ * TeePayForTypecho<a href="http://forum.typecho.org/viewtopic.php?f=6&t=11998">自媒体付费阅读插件免费版</a>
  * @package TeePay For Typecho
- * @author 小否先生
- * @version 1.5.1
+ * @author 胖蒜网
+ * @version 1.5.2
  * @link https://pangsuan.com/
  * @date 2019-04-07
  */
@@ -11,7 +11,7 @@ class TeePay_Plugin implements Typecho_Plugin_Interface{
     // 激活插件
     public static function activate(){
         $index = Helper::addMenu('文章付费');
-		Helper::addAction('teepay-post-edit', 'TeePay_Action');
+		Helper::addAction('teepay-post-free', 'TeePay_Action');
         Helper::addPanel($index, 'TeePay/manage/posts.php', '文章付费', '管理付费文章', 'administrator');
         Helper::addPanel($index, 'TeePay/manage/paylist.php', '付费记录', '付费情况记录', 'administrator');
 		Typecho_Plugin::factory('Widget_Archive')->footer = array('TeePay_Plugin', 'footer');
@@ -25,9 +25,7 @@ class TeePay_Plugin implements Typecho_Plugin_Interface{
 		$prefix = $db->getPrefix();
 		self::alterColumn($db,$prefix.'contents','teepay_isFee','enum("y","n") DEFAULT "n"');
 		self::alterColumn($db,$prefix.'contents','teepay_price','double(10,2) DEFAULT 0');
-		self::alterColumn($db,$prefix.'contents','teepay_content','text');
-		self::alterColumn($db,$prefix.'users','teepay_money','double(10,2) DEFAULT 0');
-		self::alterColumn($db,$prefix.'users','teepay_point','int(11) DEFAULT 0');	
+		self::alterColumn($db,$prefix.'contents','teepay_content','text');	
 		self::createTableTeePayFee($db);
 		
         return _t('插件已经激活，需先配置插件信息！');
@@ -36,7 +34,7 @@ class TeePay_Plugin implements Typecho_Plugin_Interface{
     // 禁用插件
     public static function deactivate(){
 		$index = Helper::removeMenu('文章付费');		
-		Helper::removeAction('teepay-post-edit');
+		Helper::removeAction('teepay-post-free');
 		Helper::removePanel($index, 'TeePay/manage/posts.php');
 		Helper::removePanel($index, 'TeePay/manage/paylist.php');
         return _t('插件已被禁用');
@@ -297,7 +295,7 @@ class TeePay_Plugin implements Typecho_Plugin_Interface{
 	{
 		/** 构建表格 */
 		$options = Typecho_Widget::widget('Widget_Options');
-		$form = new Typecho_Widget_Helper_Form(Typecho_Common::url('/action/teepay-post-edit', $options->index),
+		$form = new Typecho_Widget_Helper_Form(Typecho_Common::url('/action/teepay-post-free', $options->index),
 		Typecho_Widget_Helper_Form::POST_METHOD);
 		
 		/** 标题 */

@@ -72,7 +72,7 @@ li.am-pagination-next {
 				
 				</div>
                 <div class="col-mb-12 col-tb-4" role="form">
-                    <?php TePay_Plugin::form()->render(); ?>
+                    <?php TeePay_Plugin::form()->render(); ?>
                 </div>
             </div><!-- end .typecho-list -->
         </div><!-- end .typecho-page-main -->

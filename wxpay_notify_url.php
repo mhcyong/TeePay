@@ -17,19 +17,8 @@ if($data['return_code'] == 1){
 	unset($data['sign']);
 	if($payjs->sign($data) == $sign_verify&&$data['total_fee']==$data['attach']*100){
 		$updateItem = $db->update('table.teepay_fees')->rows(array('feestatus'=>1))->where('feeid=?',$data["out_trade_no"]);
-		$updateItemRows= $db->query($updateItem);
-		
-		$queryItem= $db->select()->from('table.teepay_fees')->where('feeid = ?', $data["out_trade_no"]); 
-		$rowItem = $db->fetchRow($queryItem);
-		if($rowItem['feestatus']==1){
-			$queryContents= $db->select()->from('table.contents')->where('cid = ?', $rowItem['feecid']); 
-			$rowContents = $db->fetchRow($queryContents);
-			$queryUser= $db->select()->from('table.users')->where('uid = ?', $rowContents['authorId']); 
-			$rowUser = $db->fetchRow($queryUser);
-			$updateUser = $db->update('table.users')->rows(array('teepay_money'=>$rowUser['teepay_money']+$rowItem['feeprice']))->where('uid=?',$rowContents['authorId']);
-			$updateUserRows= $db->query($updateUser);
-		}
-		echo 'success';
+		$updateItemRows= $db->query($updateItem);		
+		echo 'success';exit();	
 	}else{		
 		$db = Typecho_Db::get();
 		$updateItem = $db->update('table.teepay_fees')->rows(array('feestatus'=>2))->where('feeid=?',$_POST['out_trade_no']);
