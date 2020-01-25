@@ -23,13 +23,10 @@ TePay-Pro 4.0的版本从2020年1月1日开始已在官网使用，计划2月1�
 1、仰泳の猪：https://zbqbk.cn/index.php/archives/128.html  
 2、梁晓斌：https://www.liangxiaobin.com/child/99/  
 3、猫先生的个人博客：https://www.mr-mao.cn/archives/gen2-thinksystem-server-install-2008r2.html  
-4、如烟若梦：https://abcdl.cn/archives/7/   
-5、憶の年：https://www.529i.com/archives/801.html   
-6、kali博客：https://blog.bbskali.cn/index.php/archives/1504/  
-7、AppleID中文网： https://applecn.cc/appleid.html  
-8、菜仔卢的不老阁： http://www.iysky.com/say/580.html  
-9、木稚隐语： https://wbessy.com/Pay.html   
-10、太阳源码： https://www.sunym.top/archives/5/     
+4、憶の年：https://www.529i.com/archives/801.html   
+5、kali博客：https://blog.bbskali.cn/index.php/archives/1504/  
+6、木稚隐语： https://wbessy.com/Pay.html   
+7、太阳源码： https://www.sunym.top/archives/5/     
 
 
 ## TePay 专业版（[TePay-Pro](https://pangsuan.com/p/tepay-pro.html)）更新记录 ##
