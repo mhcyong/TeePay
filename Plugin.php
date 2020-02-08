@@ -4,7 +4,7 @@
  * @package TeePay For Typecho
  * @author 胖蒜网
  * @version 1.5.2
- * @link https://pangsuan.com/
+ * @link https://pangsuan.com/p/teepay.html
  * @date 2019-04-07
  */
 class TeePay_Plugin implements Typecho_Plugin_Interface{
