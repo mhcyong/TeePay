@@ -15,9 +15,9 @@
 推荐个人微信收款平台：https://payjs.cn/ref/zgpnbd    
 
 ## TePay 专业版购买方式 ##
-1：官网：https://store.pangsuan.com/p/tepay-pro.html
-2：QQ：744272645（胖蒜网）
-3、微信：pangsuan_com（不常在线）
+1：官网：https://store.pangsuan.com/p/tepay-pro.html  
+2：QQ：744272645（胖蒜网）  
+3、微信：pangsuan_com（不常在线）  
 
 
 ## 效果演示 ##
