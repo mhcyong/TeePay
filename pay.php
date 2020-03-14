@@ -9,7 +9,7 @@ date_default_timezone_set('Asia/Shanghai');
 $action = isset($_POST['action']) ? addslashes($_POST['action']) : '';
 if($action=='paysubmit'){
 	$feetype = isset($_POST['feetype']) ? addslashes($_POST['feetype']) : '';
-	$feecookie = isset($_POST['feecookie']) ? addslashes($_POST['feecookie']) : '';
+	$feecookie = isset($_COOKIE["TeePayCookie"]) ? addslashes($_COOKIE["TeePayCookie"]) : '';
 	$feecid = isset($_POST['feecid']) ? intval(urldecode($_POST['feecid'])) : '';
 	$feeuid = isset($_POST['feeuid']) ? intval(urldecode($_POST['feeuid'])) : 0;
 	

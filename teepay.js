@@ -7,7 +7,7 @@ function teepayPayPost() {
 	$.ajax({
 		type : "POST",
 		url : "/usr/plugins/TeePay/pay.php",
-		data : {"action":"paysubmit","feetype":feetype,"feecid":$("#feecid").val(),"feeuid":$("#feeuid").val(),"feecookie":$("#feecookie").val()},
+		data : {"action":"paysubmit","feetype":feetype,"feecid":$("#feecid").val(),"feeuid":$("#feeuid").val()},
 		dataType : "json",
 		success : function(data) {
 			if(data.status=="ok"){

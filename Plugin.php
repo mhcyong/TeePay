@@ -144,11 +144,8 @@ class TeePay_Plugin implements Typecho_Plugin_Interface{
 				if(!isset($_COOKIE["TeePayCookie"])){
 					$randomCode = md5(uniqid(microtime(true),true));
 					setcookie("TeePayCookie",$randomCode, time()+3600*24*$cookietime);
-					$TeePayCookie=$randomCode;
-				}else{
-					$TeePayCookie=$_COOKIE["TeePayCookie"];
 				}
-				$queryItem= $db->select()->from('table.teepay_fees')->where('feecookie = ?', $TeePayCookie)->where('feestatus = ?', 1)->where('feecid = ?', $row['cid']); 
+				$queryItem= $db->select()->from('table.teepay_fees')->where('feecookie = ?', $_COOKIE["TeePayCookie"])->where('feestatus = ?', 1)->where('feecid = ?', $row['cid']); 
 				$rowItem = $db->fetchRow($queryItem);
 				$rowUserItemNum = 0;
 				if(Typecho_Cookie::get('__typecho_uid')){
@@ -187,7 +184,6 @@ class TeePay_Plugin implements Typecho_Plugin_Interface{
 							<input type="hidden" name="action" value="paysubmit" />
 							<input type="hidden" id="feecid" name="feecid" value="<?php echo $row['cid'] ?>" />
 							<input type="hidden" id="feeuid" name="feeuid" value="<?php echo Typecho_Cookie::get('__typecho_uid') ?>" />
-							<input type="hidden" id="feecookie" name="feecookie" value="<?php echo $TeePayCookie ?>" />
 						</form>
 						<div style="clear:left;"></div>
 						<span>温馨提示：<span style="color: red">免登录付款后<?php echo $cookietime;?>天内可重复阅读隐藏内容，<a href="<?php $options->adminUrl(); ?>" style="">登录</a></span>用户付款后可永久阅读隐藏的内容。 </span>
