@@ -11,7 +11,7 @@
 
 插件下载地址：https://github.com/mhcyong/TeePay.git  
 插件介绍：https://pangsuan.com/p/teepay.html  
-演示地址：https://pangsuan.com/p/show-how.html  
+演示地址：https://store.pangsuan.com/p/show-how.html  
 推荐个人微信收款平台：https://payjs.cn/ref/zgpnbd    
 
 
@@ -29,7 +29,7 @@ TePay-Pro 4.2.1的版本2020年2月1日按计划发布。
 7、太阳源码： https://www.sunym.top/archives/5/     
 
 
-## TePay 专业版（[TePay-Pro](https://pangsuan.com/p/tepay-pro.html)）更新记录 ##
+## TePay 专业版（[TePay-Pro](https://store.pangsuan.com/p/tepay-pro.html)）更新记录 ##
 2020-02-06：TePay-Pro 4.2.3 修改手机端微信付款方式，在微信内打开可直接付款，浏览器打开弹出二维码，可截屏到微信相册扫码付款。  
 2020-02-01：按计划发布TePay-Pro 4.2.1，具体介绍请到官网。  
 2020-01-18：调整付费记录页面到插件里面，减少用户更换主题的操作，同时增加了订单管理的页；付费记录页面地址为：http://your_domain/tepay/fees；订单管理页面地址为：http://your_domain/tepay/order；该功能目前只在TePay-Pro-4.0以后版本，2月1日后购买专业版用户都可以使用。   
@@ -56,7 +56,7 @@ TePay-Pro 4.2.1的版本2020年2月1日按计划发布。
 
 ## TeePay 基础版修改记录 ##
 2020-01-22：优化了一点点小细节，另外亲测可正常使用。  
-2019-11-05：更改插件名称为TeePay，此插件不再进行大的功能变更，如有需要请了解专业版 [TePay-Pro](https://pangsuan.com/p/tepay-pro.html) 。     
+2019-11-05：更改插件名称为TeePay，此插件不再进行大的功能变更，如有需要请了解专业版 [TePay-Pro](https://store.pangsuan.com/p/tepay-pro.html) 。     
 2019-10-16: 将PC与手机端分开，手机端只保留支付宝支付，因为可以直接跳转到支付宝付款；微信在手机端没有找到好的方式，故先去掉。  
 2019-10-15: 去掉付费内容里面Parsedown.php及相关代码，减少因主题问题带来的冲突。  
 2019-09-27: 调整主站域名为 https://pangsuan.com ，但微信支付体验时的商户简称还是“微发现”。  
