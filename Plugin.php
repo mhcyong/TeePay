@@ -3,7 +3,7 @@
  * TeePayForTypecho<a href="http://forum.typecho.org/viewtopic.php?f=6&t=11998">自媒体付费阅读插件免费版</a>
  * @package TeePay For Typecho
  * @author 胖蒜网
- * @version 1.5.2
+ * @version 1.5.4
  * @link https://pangsuan.com/p/teepay.html
  * @date 2019-04-07
  */

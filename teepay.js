@@ -17,7 +17,7 @@ function teepayPayPost() {
 					  title: '支付宝扫一扫付款',
 					  anim: 2,
 					  shadeClose: true, //点击遮罩关闭
-					  content: '<center><div style="padding:20px;"><img src="https://www.kuaizhan.com/common/encode-png?large=true&data='+data.qrcode+'" width="200" /></div></center>'
+					  content: '<center><div style="padding:20px;"><img src="https://my.tv.sohu.com/user/a/wvideo/getQRCode.do?text='+data.qrcode+'" width="200" /></div></center>'
 					});
 				}else if(data.type=="payjs"){				
 					layer.open({

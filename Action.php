@@ -32,6 +32,8 @@ class TeePay_Action extends Typecho_Widget implements Widget_Interface_Do
 
 	public function action()
 	{
+		$user = Typecho_Widget::widget('Widget_User');
+        $user->pass('administrator');
 		$this->db = Typecho_Db::get();
 		$this->prefix = $this->db->getPrefix();
 		$this->options = Typecho_Widget::widget('Widget_Options');
