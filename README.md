@@ -5,7 +5,7 @@
 ***** 2、PHP 和 MySql 数据库的版本有没有问题？   
 ***** 3、自己配置是否有问题？   
 ***** 4、下载的版本是否有问题，目前最新免费版本1.5.4，本人亲测全流程都很流畅。   
-***** 5、简单修复一点，最近快站二维码不稳定，更换了，见(《TeePay 生成二维码接口故障解决方法》)[https://pangsuan.com/p/teepay-qrcode-fixed.html]。  
+***** 5、简单修复一点，最近快站二维码不稳定，更换了，见[《TeePay 生成二维码接口故障解决方法》](https://pangsuan.com/p/teepay-qrcode-fixed.html)。  
  
 
 # 安全提示 #
