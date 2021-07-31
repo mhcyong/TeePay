@@ -18,11 +18,11 @@
 
 插件下载地址：https://github.com/mhcyong/TeePay.git  
 插件介绍：https://pangsuan.com/p/teepay.html  
-演示地址：https://store.pangsuan.com/p/show-how.html  
+演示地址：https://pangsuan.com/p/show-how.html  
 推荐个人微信收款平台：https://payjs.cn/ref/zgpnbd    
 
 ## TePay 专业版购买方式 ##
-1：官网：https://store.pangsuan.com/p/tepay-pro.html  
+1：官网：https://pangsuan.com/p/tepay-pro.html  
 2：QQ：744272645（胖蒜网）  
 3、微信：pangsuan_com（不常在线）  
 
@@ -58,7 +58,7 @@
 ## 注意事项 ##
 1、支付宝支付注意是应用私钥，支付宝公钥。  
 2、使用这个插件网站必须只根目录，二级目录无效，如果一定要在二级目录请自行修改引用文件路劲。  
-3、只适用个人支付宝（需签约当面付收单，免费）和个人微信（需在 [payjs.cn](https://payjs.cn/ref/zgpnbd) 开通个人微商户，费用300元）。  
+3、只适用个人支付宝（需签约当面付收单，免费）和个人微信（需在 [payjs.cn](https://payjs.cn/ref/zgpnbd) 开通个人微商户，费用300元，找我拿优惠码可以便宜100元，QQ：744272645）。  
 4、因违法被封，或服务器在国外不能收到支付宝回调通知的无法使用。
 
 
@@ -67,5 +67,5 @@
 2019-11-05：更改插件名称为TeePay，此插件不再进行大的功能变更，如有需要请了解专业版 [TePay-Pro](https://store.pangsuan.com/p/tepay-pro.html) 。     
 2019-10-16: 将PC与手机端分开，手机端只保留支付宝支付，因为可以直接跳转到支付宝付款；微信在手机端没有找到好的方式，故先去掉。  
 2019-10-15: 去掉付费内容里面Parsedown.php及相关代码，减少因主题问题带来的冲突。  
-2019-09-27: 调整主站域名为 https://pangsuan.com ，但微信支付体验时的商户简称还是“微发现”。  
+2019-09-27: 调整主站域名为 https://pangsuan.com ，微商户也改名为“胖蒜网”。  
 2019-07-23：修改菜单位置为顶级菜单，增加一个付费记录页面。
